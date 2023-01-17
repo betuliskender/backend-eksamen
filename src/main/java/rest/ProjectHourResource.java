@@ -44,4 +44,11 @@ public class ProjectHourResource {
         return Response.ok().entity(GSON.toJson(FACADE.getInvoice(id))).build();
     }
 
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response delete(@PathParam("id") int id){
+        return Response.ok().entity(GSON.toJson(FACADE.delete(id))).build();
+    }
+
 }

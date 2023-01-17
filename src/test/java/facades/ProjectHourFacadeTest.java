@@ -82,4 +82,10 @@ public class ProjectHourFacadeTest {
         assertNotNull(actual.getId());
     }
 
+    @Test
+    void delete() {
+        boolean response = facade.delete(ph1.getId());
+        assertEquals(true, response);
+    }
+
 }

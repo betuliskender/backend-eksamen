@@ -4,6 +4,7 @@ import dtos.DeveloperDto;
 import dtos.ProjectDto;
 import dtos.ProjectHourDto;
 import dtos.ProjectInvoiceDto;
+import entities.Developer;
 import entities.Project;
 import entities.ProjectHour;
 
@@ -50,6 +51,23 @@ public class ProjectHourFacade {
             em.close();
         }
         return new ProjectHourDto(projectHour);
+    }
+
+    public boolean delete(int id){
+        EntityManager em = emf.createEntityManager();
+        ProjectHour projectHour = em.find(ProjectHour.class, id);
+
+        try {
+            em.getTransaction().begin();
+            em.remove(projectHour);
+            em.getTransaction().commit();
+        }catch (IllegalArgumentException ex){
+            System.out.println(ex);
+            return false;
+        } finally {
+            em.close();
+        }
+        return true;
     }
 
     public List<ProjectInvoiceDto> getInvoice(int projectId){
